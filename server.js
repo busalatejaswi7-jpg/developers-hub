@@ -28,11 +28,12 @@ const errorHandler = require("./middleware/errorMiddleware");
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
+console.log("MONGO_URI:", process.env.MONGO_URI ? "EXISTS" : "NOT FOUND");
 
 // Connect DB → then start server
 mongoose
   .connect(process.env.MONGO_URI, {
-    serverSelectionTimeoutMS: 5000, // fail fast
+    serverSelectionTimeoutMS: 20000, // fail fast
   })
   .then(() => {
     console.log("MongoDB Connected");
